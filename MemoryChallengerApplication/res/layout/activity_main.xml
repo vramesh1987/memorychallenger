@@ -1,0 +1,128 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_rel_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#b8c4cc"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_bar"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="#ff000000" >
+	
+          <Button 
+        	android:id="@+id/Button6"
+        	android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:background="@drawable/close"
+        	android:paddingRight="20dp"
+        	android:layout_toLeftOf="@+id/Button4"
+            />
+         
+         <Button 
+        	android:id="@+id/Button4"
+        	android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:background="@drawable/hints"
+        	android:paddingRight="20dp"
+        	android:layout_toLeftOf="@+id/Button3"
+            />
+         
+        <Button 
+        	android:id="@+id/Button3"
+        	android:layout_alignParentRight="true"
+        	android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:background="@drawable/restart"
+        	android:paddingRight="20dp"
+            />
+    </RelativeLayout>
+	
+     <!-- <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/squares_remaining" 
+        android:layout_below="@+id/title_bar"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="27dp"
+        android:text="@string/time_remaining" />-->
+    
+    <!--<Button
+        android:id="@+id/button1"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="18dp"
+        android:text="Restart Game" />
+
+    <Button
+        android:id="@+id/button2"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button1"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="26dp"
+        android:text="Quit Game" />-->
+
+    <FrameLayout
+        android:id="@+id/frame_id"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_below="@+id/title_bar"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="@dimen/table_horizontal_margin"
+        android:paddingRight="@dimen/table_horizontal_margin" 
+        android:paddingTop="@dimen/table_horizontal_margin"
+        android:paddingBottom="@dimen/table_horizontal_margin">
+
+        <TableLayout
+            android:id="@+id/block_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+        </TableLayout>
+        
+    </FrameLayout>
+    
+	<TextView
+        android:id="@+id/textView1"
+        android:layout_width="100dp"
+        android:layout_height="55dp"
+        android:text="@string/time_taken" 
+        android:gravity="center"
+        android:layout_marginLeft="27dp"
+        android:background="@drawable/textview_shape"
+        android:layout_below="@+id/frame_id"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="100dp"
+        android:layout_height="55dp"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:gravity="center"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="27dp"
+        android:background="@drawable/textview_shape"
+        android:text="@string/best_time" />
+    
+</RelativeLayout>
