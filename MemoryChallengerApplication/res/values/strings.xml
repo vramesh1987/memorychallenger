@@ -9,5 +9,7 @@
     <string name="game_win">Congratulations! You won</string>
     <string name="restart_game">Restart</string>
     <string name="quit_game">Quit</string>
+    <string name="help_ok">OK. Got it!</string>
+    <string name="help_title">Help!</string>
 
 </resources>

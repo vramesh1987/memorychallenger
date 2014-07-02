@@ -75,7 +75,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+				new HelpDialog().show(getFragmentManager(), null);
 			}
 			
 		});
@@ -179,6 +179,7 @@ public class MainActivity extends Activity {
 			}
 			tl.addView(tr, rowLp);
 		}
+		new HelpDialog().show(getFragmentManager(), null);
 	}
 
 	Runnable r = new Runnable(){
@@ -352,6 +353,24 @@ public class MainActivity extends Activity {
 	                   public void onClick(DialogInterface dialog, int id) {
 	                       // User cancelled the dialog
 	                	  finish();
+	                   }
+	               });
+	        // Create the AlertDialog object and return it
+	        return builder.create();
+	    }
+	}
+	
+	public class HelpDialog extends DialogFragment {
+	    @Override
+	    public Dialog onCreateDialog(Bundle savedInstanceState) {
+	        // Use the Builder class for convenient dialog construction
+	        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+	        builder .setTitle(R.string.help_title)
+	        .setMessage(R.string.help_message)
+	        .setPositiveButton(R.string.help_ok, new DialogInterface.OnClickListener() {
+	                   public void onClick(DialogInterface dialog, int id) {
+	                       // FIRE ZE MISSILES!
+	                	   
 	                   }
 	               });
 	        // Create the AlertDialog object and return it
