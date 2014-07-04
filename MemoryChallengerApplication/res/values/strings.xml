@@ -11,5 +11,6 @@
     <string name="quit_game">Quit</string>
     <string name="help_ok">OK. Got it!</string>
     <string name="help_title">Help!</string>
+    <string name="app_title">Memory</string>
 
 </resources>

@@ -106,7 +106,7 @@ public class MainActivity extends Activity {
 		        1.0f);
 		TableRow.LayoutParams cellLp = new TableRow.LayoutParams(
 		        ViewGroup.LayoutParams.WRAP_CONTENT,
-		        ViewGroup.LayoutParams.WRAP_CONTENT,
+		        ViewGroup.LayoutParams.MATCH_PARENT,
 		        1.0f);
 		
 		for(int i=0;i<NUM_ROWS;i++)
@@ -115,7 +115,9 @@ public class MainActivity extends Activity {
 			
 			for(int j=0;j<NUM_COLS;j++)
 			{
-				tr.addView(blockList[i*NUM_COLS+j] = new Block(this), cellLp);
+				blockList[i*NUM_COLS+j] = new Block(this);
+				cellLp.setMargins(10, 10, 10, 10);
+				tr.addView(blockList[i*NUM_COLS+j], cellLp);
 				blockList[i*NUM_COLS+j].setNumber(chosenNumbers[i*NUM_COLS+j][0]);
 				blockList[i*NUM_COLS+j].setColor(chosenNumbers[i*NUM_COLS+j][1]);
 				blockList[i*NUM_COLS+j].setOnClickListener(new OnClickListener(){

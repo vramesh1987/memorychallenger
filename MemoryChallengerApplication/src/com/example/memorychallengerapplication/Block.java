@@ -20,15 +20,17 @@ public class Block extends AutoResizeButton{
 		//setBackgroundColor(Color.CYAN);
 
 		//this.setBackgroundResource(R.layout.button_layout);
-		setBackground(getResources().getDrawable(R.drawable.lock));
-		 
+		//setBackground(getResources().getDrawable(R.drawable.lock));
+		setBackgroundResource(R.drawable.button_enabled);
+		setText("  ");				 
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void setDefaultBackGround()
 	{
-		setBackground(getResources().getDrawable(R.drawable.lock));
-		setText("");		
+		//setBackground(getResources().getDrawable(R.drawable.lock));
+		setBackgroundResource(R.drawable.button_enabled);
+		setText("  ");		
 	}
 	public int getEnabledStatus()
 	{
@@ -37,22 +39,25 @@ public class Block extends AutoResizeButton{
 	
 	public void setTickMark()
 	{
-		setBackground(getResources().getDrawable(R.drawable.grey));
-		//setBackgroundResource(R.drawable.button_shape);
+		//setBackground(getResources().getDrawable(R.drawable.grey));
+		setBackgroundResource(R.drawable.button_shape);
 		setText("$$");
 	}
 	
 	public void setNumberAndBackground()
 	{
+		setText(Integer.toString(blockNum).trim());
 		if(blockColor==0)
 		{
-			setBackground(getResources().getDrawable(R.drawable.blue));
+			//setBackground(getResources().getDrawable(R.drawable.blue));
+			setBackgroundResource(R.drawable.button_blue);
 		}
 		else
 		{
-			setBackground(getResources().getDrawable(R.drawable.brown));
+			//setBackground(getResources().getDrawable(R.drawable.brown));
+			setBackgroundResource(R.drawable.button_yellow);
 		}
-		setText(Integer.toString(blockNum));
+		
 	}
 	
 	public void setNumber(int num)
