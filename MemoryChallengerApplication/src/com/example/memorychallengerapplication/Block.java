@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
+// First android app
+
 public class Block extends Button{
 
 	private int enable = 0;
