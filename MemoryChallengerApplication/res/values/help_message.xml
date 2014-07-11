@@ -4,9 +4,5 @@
   This is a modification of the traditional memory game. All the tiles are
   initially closed contain a number with a color. The user has to match tiles
   with the same number and color. \n\n
-  The buttons on the top bar are: \n\n
-  The question mark symbol will bring up the help message you are seeing now. \n\n
-  The close symbol will exit the current game. \n\n
-  The refresh symbol is used to restart the game.
- </string>
+</string>
 </resources>

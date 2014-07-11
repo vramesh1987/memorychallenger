@@ -11,7 +11,6 @@ import android.app.DialogFragment;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.support.v7.widget.GridLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -29,8 +28,8 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	private static final int NUM_ROWS = 5;
-	private static final int NUM_COLS = 4;
+	private static final int NUM_ROWS = 8;
+	private static final int NUM_COLS = 6;
 	public static final int BUTTON_ENABLED = 0;
 	public static final int BUTTON_DISABLED = 1;
 	public static final int BUTTON_MATCHED = 2;
@@ -41,10 +40,10 @@ public class MainActivity extends Activity {
 	private Block prevBlock=null, currBlock=null;
 	private Handler tHandler = new Handler();
 	private Handler timerHandler = new Handler();
-	private boolean isHandlerActive = false, userTouched = false;
+	private boolean isHandlerActive = false, userTouched = false, isChecked = false;
 	private TableLayout tl;
 	private TextView time_taken, best_time;
-	private int time_cnt = 0;
+	private int time_cnt = 0, highest_time = 65536;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +84,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				tHandler.removeCallbacks(tRunnable);
 				restartGame();
 			}
 			
@@ -181,7 +181,10 @@ public class MainActivity extends Activity {
 			}
 			tl.addView(tr, rowLp);
 		}
-		new HelpDialog().show(getFragmentManager(), null);
+		if(!isChecked)
+		{
+			new HelpDialog().show(getFragmentManager(), null);
+		}
 	}
 
 	Runnable r = new Runnable(){
@@ -202,7 +205,7 @@ public class MainActivity extends Activity {
 		public void run() {
 			// TODO Auto-generated method stub
 			time_taken.setText("time taken \n\n" + Integer.toString(++time_cnt));
-			timerHandler.postDelayed(tRunnable, 1000);
+			tHandler.postDelayed(tRunnable, 1000);
 		}
 		
 	};
@@ -310,7 +313,12 @@ public class MainActivity extends Activity {
 		if(cnt==(NUM_ROWS*NUM_COLS))
 		{
 			Log.i("GAME", "game is won!!");
-			best_time.setText("best time \n \n" + Integer.toString(time_cnt));
+			if(time_cnt < highest_time)
+			{
+				best_time.setText("best time \n \n" + Integer.toString(time_cnt));
+				highest_time = time_cnt;
+			}
+			tHandler.removeCallbacks(tRunnable);
 			new GameWinDialogNew().show(getFragmentManager(), null);
 		}
 	}
@@ -323,6 +331,9 @@ public class MainActivity extends Activity {
 	}
 	
 	public void restartGame(){
+		time_cnt = 0;
+		time_taken.setText("time taken \n\n 0" );
+		userTouched = false;
 		initializeBlockNumbers();
 		for(int i=0;i<NUM_ROWS;i++)
 		{
@@ -334,7 +345,7 @@ public class MainActivity extends Activity {
 				curBlock.setColor(chosenNumbers[i*NUM_COLS+j][1]);
 				curBlock.setDefaultBackGround();
 				curBlock.setButtonStatus(BUTTON_ENABLED);
-				userTouched = false;
+				//userTouched = false;
 			}
 		}
 	}
@@ -366,9 +377,19 @@ public class MainActivity extends Activity {
 	    @Override
 	    public Dialog onCreateDialog(Bundle savedInstanceState) {
 	        // Use the Builder class for convenient dialog construction
+	    	final CharSequence[] list = {"Do not show this message again"};
+	    	
 	        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 	        builder .setTitle(R.string.help_title)
 	        .setMessage(R.string.help_message)
+	        .setSingleChoiceItems(list, 0, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					isChecked = true;
+				}
+			})
 	        .setPositiveButton(R.string.help_ok, new DialogInterface.OnClickListener() {
 	                   public void onClick(DialogInterface dialog, int id) {
 	                       // FIRE ZE MISSILES!
@@ -383,8 +404,9 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume()
 	{
-		SharedPreferences highScore = getPreferences(MODE_PRIVATE);
-		String high_score = highScore.getString("highScore", "Not Set");
+		SharedPreferences storedValues = getPreferences(MODE_PRIVATE);
+		isChecked = storedValues.getBoolean("checked", false);
+		String high_score = storedValues.getString("highScore", "Not Set");
 		Log.i("debug", high_score);
 		if(high_score == "Not Set")
 		{
@@ -400,10 +422,11 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onStop()
 	{
-		SharedPreferences highScore = getPreferences(MODE_PRIVATE);
-		SharedPreferences.Editor editor = highScore.edit();
+		SharedPreferences storedValues = getPreferences(MODE_PRIVATE);
+		SharedPreferences.Editor editor = storedValues.edit();
 		Log.i("DEBUG ON STOP", best_time.getText().toString());
 		editor.putString("highScore", best_time.getText().toString());
+		editor.putBoolean("checked", isChecked);
 		editor.commit();
 		super.onStop();
 	}

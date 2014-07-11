@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
-public class Block extends AutoResizeButton{
+public class Block extends Button{
 
 	private int enable = 0;
 	private boolean opened = false;
@@ -22,7 +22,9 @@ public class Block extends AutoResizeButton{
 		//this.setBackgroundResource(R.layout.button_layout);
 		//setBackground(getResources().getDrawable(R.drawable.lock));
 		setBackgroundResource(R.drawable.button_enabled);
-		setText("  ");				 
+		setText("");				 
+		this.setTextSize(16);
+		this.setTextColor(Color.WHITE);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -30,7 +32,7 @@ public class Block extends AutoResizeButton{
 	{
 		//setBackground(getResources().getDrawable(R.drawable.lock));
 		setBackgroundResource(R.drawable.button_enabled);
-		setText("  ");		
+		setText("");		
 	}
 	public int getEnabledStatus()
 	{
@@ -41,12 +43,12 @@ public class Block extends AutoResizeButton{
 	{
 		//setBackground(getResources().getDrawable(R.drawable.grey));
 		setBackgroundResource(R.drawable.button_shape);
-		setText("$$");
+		setText("");
 	}
 	
 	public void setNumberAndBackground()
 	{
-		setText(Integer.toString(blockNum).trim());
+		setText(String.valueOf(blockNum));
 		if(blockColor==0)
 		{
 			//setBackground(getResources().getDrawable(R.drawable.blue));
